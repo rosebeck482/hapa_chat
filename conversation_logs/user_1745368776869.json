@@ -95,6 +95,38 @@
       "sender": "bot",
       "text": "How old are you?",
       "action": "action_listen"
+    },
+    {
+      "timestamp": "2025-04-23T02:54:51.832335",
+      "sender": "user_1745368776869",
+      "text": "19",
+      "intent": {
+        "name": "provide_age",
+        "confidence": 0.9951399564743042
+      },
+      "section": "personal_data_stage: 2"
+    },
+    {
+      "timestamp": "2025-04-23T02:54:51.832371",
+      "sender": "bot",
+      "text": "How old are you?",
+      "action": "action_listen"
+    },
+    {
+      "timestamp": "2025-04-23T03:12:23.977722",
+      "sender": "user_1745368776869",
+      "text": "19@@",
+      "intent": {
+        "name": "provide_age",
+        "confidence": 0.9919787645339966
+      },
+      "section": "personal_data_stage: 2"
+    },
+    {
+      "timestamp": "2025-04-23T03:12:23.978758",
+      "sender": "bot",
+      "text": "How old are you?",
+      "action": "action_listen"
     }
   ],
   "slot_history": [
@@ -145,6 +177,22 @@
         "name": "Rose",
         "personal_data_stage": 2,
         "age": "19"
+      }
+    },
+    {
+      "timestamp": "2025-04-23T02:54:51.832377",
+      "slots": {
+        "name": "Rose",
+        "personal_data_stage": 2,
+        "age": "19"
+      }
+    },
+    {
+      "timestamp": "2025-04-23T03:12:23.978767",
+      "slots": {
+        "name": "Rose",
+        "personal_data_stage": 2,
+        "age": "19@@"
       }
     }
   ]

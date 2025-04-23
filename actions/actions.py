@@ -64,7 +64,7 @@ def call_ollama_api(system_prompt, user_prompt, max_tokens=300, temperature=0.7)
         
         # Make the API request
         logger.info(f"Sending request to Ollama API at {url}")
-        client = httpx.Client() 
+        client = httpx.Client(timeout=300.0)  # Increase timeout to 300 seconds
         response = client.post(url, json=payload)
         response.raise_for_status()
         
