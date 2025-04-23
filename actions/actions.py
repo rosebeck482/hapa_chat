@@ -372,6 +372,10 @@ class ActionCollectGender(Action):
             dispatcher.utter_message(text=f"Thanks for sharing your gender as {current_gender}, {name}!")
             dispatcher.utter_message(response="utter_ask_gender_preference")
             return [SlotSet("personal_data_stage", 4)]
+        
+        entities = tracker.latest_message.get("entities", [])
+        gender_entity = next((e for e in entities if e["entity"] == "gender"), None)
+        gender = gender_entity["value"] if gender_entity else None
 
         # Step 2: Try to extract using Ollama if not found
         if not gender:
@@ -418,6 +422,10 @@ class ActionCollectGenderPreference(Action):
             dispatcher.utter_message(text=f"Thanks for sharing that you're interested in {current_gender_pref}s, {name}!")
             dispatcher.utter_message(response="utter_ask_age_preference")
             return [SlotSet("personal_data_stage", 5)]
+        
+        entities = tracker.latest_message.get("entities", [])
+        gender_pref_entity = next((e for e in entities if e["entity"] == "gender_preference"), None)
+        gender_pref = gender_pref_entity["value"] if gender_pref_entity else None
 
         # Step 2: Try to extract with Ollama if needed
         if not gender_pref:
@@ -464,6 +472,10 @@ class ActionCollectAgePreference(Action):
             dispatcher.utter_message(text=f"Thanks for sharing your age preference, {name}!")
             dispatcher.utter_message(response="utter_ask_height")
             return [SlotSet("personal_data_stage", 6)]
+        
+        entities = tracker.latest_message.get("entities", [])
+        age_pref_entity = next((e for e in entities if e["entity"] == "age_preference"), None)
+        age_pref = age_pref_entity["value"] if age_pref_entity else None
 
         # Step 2: Try Ollama if regex didn't work
         if not age_preference:
@@ -510,6 +522,10 @@ class ActionCollectHeight(Action):
             dispatcher.utter_message(text=f"Thanks for sharing that you're {current_height} tall, {name}!")
             dispatcher.utter_message(response="utter_ask_interests")
             return [SlotSet("personal_data_stage", 7)]
+        
+        entities = tracker.latest_message.get("entities", [])
+        height_entity = next((e for e in entities if e["entity"] == "height"), None)
+        height = height_entity["value"] if height_entity else None
 
         # Step 2: Try Ollama fallback if pattern matching fails
         if not height:
