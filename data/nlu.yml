@@ -1,0 +1,1039 @@
+version: "3.1"
+nlu:
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - hey there
+      - hi there
+      - greetings
+      - what's up?
+      - yo
+      - howdy
+      - hola
+      - hey bot
+      - hello bot
+      - hi bot
+      - hello hapa
+      - hi hapa
+      - hey hapa
+      - hiya
+      - sup
+      - hey, how's it going?
+      - morning
+      - evening
+      - salutations
+      - hiya there
+      - good day
+      - how do you do?
+      - yo, what's up?
+      - g'day
+      - hiya, friend
+      - hello there, buddy
+      - hey, how are you?
+      - hi, what's new?
+      - hello, beautiful day
+      - hey, nice to see you
+      - hi, hope you're well
+      - hello, my friend
+      - hey, long time no see
+      - hi, how's everything?
+      - greetings and salutations
+      - hello, hope you're having a great day
+      - hey, what's cracking?
+      - hi, how are you doing today?
+      - greetings, friend
+      - hello, hope you're enjoying your day
+      - hey, what have you been up to?
+      - hi, lovely day, isn't it?
+      - hello, how's your day going?
+      - hey, what's new with you?
+      - hi, great to see you
+      - hello, hope all is well
+      - hey, how's your mood today?
+      - hi, good to connect
+      - hello, how are things?
+      - hey, nice day, isn't it?
+      - hi, how's it hanging?
+      - hello, what's happening?
+      - hey, hope you're doing well
+      - hi, how's your spirit today?
+  - intent: goodbye
+    examples: |
+      - bye
+      - goodbye
+      - see you later
+      - I'm done
+      - that's all
+      - see ya
+      - take care
+      - catch you later
+      - farewell
+      - talk to you soon
+      - see you around
+      - later
+      - goodbye for now
+      - talk soon
+      - bye bye
+      - take it easy
+      - cheerio
+      - au revoir
+      - peace out
+      - catch you on the flip side
+      - I must leave now
+      - so long
+      - until next time
+      - adios
+      - bye, have a good one
+      - I'm off
+      - see you in a bit
+      - farewell my friend
+      - goodnight
+      - bye for now
+      - later gator
+      - got to run
+      - I'm heading out
+      - bye now
+      - take care, see you soon
+      - peace
+      - goodbye, take care
+      - see you later, alligator
+      - until we meet again
+      - bye, catch you later
+      - I have to go
+      - see you next time
+      - bye, see you soon
+      - goodbye, my friend
+      - I'm signing off
+      - time to bounce
+      - I'm out
+      - bye, take it easy
+      - see ya later
+      - later, buddy
+      - talk to you later
+      - bye, have a great day
+      - take care, bye
+      - see you, take care
+      - bye, until next time
+      - I'm off to go
+      - goodbye, see you around
+      - catch you later, friend
+      - bye, have a good one
+      - adieu
+  - intent: provide_name
+    examples: |
+      - My name is [John](name)
+      - I'm [Sarah](name)
+      - [Michael](name)
+      - It's [Jessica](name)
+      - You can call me [David](name)
+      - [Rose](name)
+      - [Alex](name)
+      - [Emma](name)
+      - [James](name)
+      - I am [Robert](name)
+      - Call me [Jennifer](name)
+      - The name's [Daniel](name)
+      - [Lisa](name) is my name
+      - People call me [Thomas](name)
+      - [Emily](name) here
+      - Just call me [William](name)
+      - [Olivia](name) is what I go by
+      - [Henry](name) lol
+      - My name's [Sophia](name)
+      - [Matthew](name) is fine
+      - I go by [Ava](name)
+      - [Christopher](name) is my name
+      - [Isabella](name)
+      - [Andrew](name) here
+      - [Mia](name) is me
+      - [Joseph](name) is what I'm called
+      - [Charlotte](name) :)
+      - [Ethan](name) at your service
+      - [Amelia](name) is my first name
+      - [Benjamin](name) for short
+      - Call me [Oliver](name)
+      - Just [Liam](name)
+      - I'm known as [Grace](name)
+      - Friends call me [Lucas](name)
+      - I am [Aiden](name)
+      - Call me [Avery](name)
+      - They call me [Caleb](name)
+      - I'm [Dakota](name)
+      - My name is [Elijah](name)
+      - I'm known as [Fiona](name)
+      - Just call me [Gavin](name)
+      - I go by [Hazel](name)
+      - I'm [Isaac](name)
+      - You can call me [Jasmine](name)
+      - I am [Kyle](name)
+      - My name's [Layla](name)
+      - I'm [Mason](name)
+      - I am called [Nora](name)
+      - Just call me [Owen](name)
+      - I'm [Piper](name)
+      - They call me [Quinn](name)
+      - My friends call me [Riley](name)
+      - I go by [Sebastian](name)
+      - You can call me [Tessa](name)
+      - I am known as [Uriel](name)
+      - Just call me [Vanessa](name)
+      - I'm [Wyatt](name)
+      - They refer to me as [Xander](name)
+      - I'm [Yara](name)
+      - My name is [Zane](name)
+      - I answer to [Cameron](name)
+      - Call me [Dylan](name)
+      - I'm [Evelyn](name)
+      - People call me [Freddie](name)
+      - My name's [Gabriel](name)
+      - I'm [Hannah](name)
+      - I am known as [Ian](name)
+      - Please call me [Jaxon](name)
+      - I prefer [Kylie](name)
+      - I'm [Landon](name)
+      - Just call me [Maya](name)
+      - I am [Nolan](name)
+      - You can call me [Olive](name)
+      - I'm [Preston](name)
+      - They call me [Quincy](name)
+      - My name is [Rowan](name)
+      - I go by [Sage](name)
+      - I'm [Tristan](name)
+      - They call me [Uma](name)
+      - Just call me [Victor](name)
+      - I'm known as [Willa](name)
+      - I answer to [Ximena](name)
+      - Call me [Yosef](name)
+      - I'm [Zelda](name)
+  - intent: provide_age
+    examples: |
+      - I'm [25](age) years old
+      - I am [30](age)
+      - [28](age) years old
+      - Just turned [35](age)
+      - I recently turned [40](age)
+      - I'm [29](age) years old
+      - Currently, I'm [32](age)
+      - I am in my [27](age) years
+      - [33](age) and thriving
+      - [24](age) years young
+      - I'm [21](age) years old
+      - I just turned [22](age)
+      - I'm [23](age) years old
+      - I'm [26](age) years old
+      - I'm [27](age) years old
+      - I'm [28](age) years young
+      - I'm [29](age) years young
+      - I am [30](age) years old
+      - I'm [31](age)
+      - I'm [32](age) years old
+      - I'm [33](age)
+      - I'm [34](age) years old
+      - I am [35](age) years old
+      - I'm [36](age) years old
+      - I'm [37](age) years old
+      - I'm [38](age) years old
+      - I'm [39](age)
+      - I'm [40](age)
+      - I'm [41](age) years old
+      - I just turned [42](age)
+      - I'm [43](age)
+      - I'm [44](age) years old
+      - I'm [45](age)
+      - I am [46](age) years old
+      - I'm [47](age)
+      - I'm [48](age) years old
+      - I recently turned [49](age)
+      - I'm [50](age) years old
+      - I'm [19](age)
+      - I'm [20](age) years old
+      - I'm [51](age)
+      - I'm [52](age) years old
+      - I'm [53](age)
+      - I am [54](age) years old
+      - I'm [55](age)
+      - I just turned [56](age)
+      - I'm [57](age) years old
+      - I'm [58](age)
+      - I'm [59](age) years old
+      - I'm [60](age)
+      - I'm [61](age) years old
+      - I am [62](age)
+      - I'm [63](age) years old
+      - I'm [64](age)
+      - I'm [65](age) years old
+      - I recently turned [66](age)
+      - I'm [67](age)
+      - I'm [68](age) years old
+      - I'm [69](age)
+      - I am [70](age) years old
+      - hit [29](age) last month
+  - intent: provide_gender
+    examples: |
+      - I'm a [male](gender)
+      - I'm [female](gender)
+      - I identify as [non-binary](gender)
+      - I'm [man](gender)
+      - I'm a [woman](gender)
+      - I am [transgender](gender)
+      - I consider myself [genderqueer](gender)
+      - I'm [agender](gender)
+      - I'm [pangender](gender)
+      - I feel [gender neutral](gender)
+      - I am a [cisgender male](gender)
+      - I am a [cisgender female](gender)
+      - I consider myself [genderfluid](gender)
+      - I am [bigender](gender)
+      - I identify as [androgyne](gender)
+      - I am [transmasculine](gender)
+      - I am [transfeminine](gender)
+      - I describe myself as [gender non-conforming](gender)
+      - I feel like a [man](gender)
+      - I feel like a [woman](gender)
+      - I'm [male-presenting](gender)
+      - I'm [female-presenting](gender)
+      - I identify as [queer](gender)
+      - I feel [feminine](gender)
+      - I feel [masculine](gender)
+      - I am [male-identifying](gender)
+      - I am [female-identifying](gender)
+      - I identify as [intersex](gender)
+      - I see myself as a [non-binary person](gender)
+      - I consider myself [agender](gender)
+      - I am [pangender](gender)
+      - I see myself as [gender neutral](gender)
+      - I'm [fluid](gender)
+      - I am [demiboy](gender)
+      - I am [demigirl](gender)
+      - I identify as [two-spirit](gender)
+      - I consider myself [femme](gender)
+      - I'm [butch](gender)
+      - I describe myself as [androgynous](gender)
+      - I am [beyond the binary](gender)
+      - I identify as [fluid-gender](gender)
+      - I'm [non-cisgender](gender)
+      - I lean towards a [masculine](gender) presentation
+      - I lean towards a [feminine](gender) presentation
+      - I consider my gender to be [complex](gender)
+      - I am [gender diverse](gender)
+      - I express a [genderqueer](gender) identity
+      - I identify with a [non-traditional](gender) gender
+      - I feel like I'm [feminine-presenting](gender)
+      - I consider my gender [nonconforming](gender)
+      - I am [masculine-presenting](gender)
+      - I identify with [fluidity](gender)
+      - I'm [gender expansive](gender)
+      - I am [multi-gender](gender)
+      - I consider myself [polygender](gender)
+      - I align with a [modern gender](gender) identity
+      - I feel [androgynous](gender)
+      - I identify as [trans](gender)
+      - I am [diverse](gender) in my gender expression
+  - intent: provide_gender_preference
+    examples: |
+      - I'm interested in [men](gender_preference)
+      - I like [women](gender_preference)
+      - I prefer [both](gender_preference)
+      - Looking for [any gender](gender_preference)
+      - I'm attracted to [non-binary](gender_preference) individuals
+      - I like [transgender](gender_preference) people
+      - Prefer [genderqueer](gender_preference) partners
+      - I'm open to [all genders](gender_preference)
+      - I'm into [men](gender_preference)
+      - I prefer [men](gender_preference) over others
+      - My type is [men](gender_preference)
+      - I'm attracted to [men](gender_preference)
+      - I usually go for [men](gender_preference)
+      - I find [men](gender_preference) appealing
+      - I'm mainly interested in [men](gender_preference)
+      - I lean towards [men](gender_preference)
+      - I like dating [men](gender_preference)
+      - I'm a fan of [men](gender_preference)
+      - I tend to choose [women](gender_preference)
+      - I'm drawn to [women](gender_preference)
+      - My preference is [women](gender_preference)
+      - I have a thing for [women](gender_preference)
+      - I'm mostly attracted to [women](gender_preference)
+      - I go for [women](gender_preference)
+      - I have a soft spot for [women](gender_preference)
+      - I am fond of [women](gender_preference)
+      - I'm interested in dating [women](gender_preference)
+      - I usually choose [women](gender_preference)
+      - I appreciate [both](gender_preference) equally
+      - I'm open to [both](gender_preference) options
+      - I have a preference for [both](gender_preference)
+      - I enjoy the company of [both](gender_preference)
+      - I like meeting [both](gender_preference) types
+      - I'm equally attracted to [both](gender_preference)
+      - I have an interest in [both](gender_preference) genders
+      - I'm attracted to [both](gender_preference) sexes
+      - I appreciate [both](gender_preference) perspectives
+      - I don't choose over [both](gender_preference)
+      - I don't mind [any gender](gender_preference) at all
+      - I'm open to [any gender](gender_preference)
+      - My taste is [any gender](gender_preference)
+      - I welcome [any gender](gender_preference) relationships
+      - I'm attracted to [any gender](gender_preference) individuals
+      - I like [any gender](gender_preference) equally
+      - I consider [any gender](gender_preference) appealing
+      - I feel a connection with [any gender](gender_preference)
+      - I'm flexible with [any gender](gender_preference)
+      - I find [any gender](gender_preference) interesting
+      - I'm intrigued by [non-binary](gender_preference) folks
+      - I find [non-binary](gender_preference) people attractive
+      - I admire [non-binary](gender_preference) qualities
+      - I appreciate the uniqueness of [non-binary](gender_preference) individuals
+      - I often date [non-binary](gender_preference) people
+      - I have a preference for [transgender](gender_preference) individuals
+      - I'm attracted to [transgender](gender_preference) people
+      - I look for [transgender](gender_preference) partners
+      - I appreciate [transgender](gender_preference) qualities
+      - I'm open to [genderqueer](gender_preference) relationships
+  - intent: provide_age_preference
+    examples: |
+      - I prefer people between [25-35](age_preference)
+      - Looking for someone [30-40](age_preference)
+      - [20-30](age_preference)
+      - Around my age or older
+      - I like partners who are [22-32](age_preference)
+      - Ideally, someone in the [28-38](age_preference) range
+      - Prefer someone [24-34](age_preference)
+      - My ideal age range is [26-36](age_preference)
+      - I'm interested in someone between [18-25](age_preference)
+      - I like people aged [20-28](age_preference)
+      - My ideal age is within [22-30](age_preference)
+      - I prefer partners in the [23-31](age_preference) bracket
+      - I'm looking for someone between [24-32](age_preference)
+      - Ideal age range for me is [25-33](age_preference)
+      - I favor individuals aged [26-34](age_preference)
+      - I'm attracted to people in the [27-35](age_preference) range
+      - My sweet spot is [28-36](age_preference)
+      - I enjoy dating someone between [29-37](age_preference)
+      - I'm open to ages [30-38](age_preference)
+      - I find people in the [31-39](age_preference) range appealing
+      - I'm into those who are [32-40](age_preference)
+      - I prefer individuals aged [33-41](age_preference)
+      - Looking for someone in the [34-42](age_preference) range
+      - I lean towards [35-43](age_preference)
+      - My ideal match is between [36-44](age_preference)
+      - I'm interested in those in the [37-45](age_preference) bracket
+      - I like partners aged [38-46](age_preference)
+      - I'm drawn to people between [39-47](age_preference)
+      - I prefer dating individuals in the [40-48](age_preference) range
+      - I'm into someone aged [41-49](age_preference)
+      - I favor an age range of [42-50](age_preference)
+      - I like people whose ages are [43-51](age_preference)
+      - I'm attracted to those between [44-52](age_preference)
+      - I lean towards individuals aged [45-53](age_preference)
+      - I enjoy dating someone in the [46-54](age_preference) bracket
+      - I'm looking for a partner aged [47-55](age_preference)
+      - My preferred age range is [48-56](age_preference)
+      - I appreciate partners between [49-57](age_preference)
+      - I am interested in those aged [50-58](age_preference)
+      - I like people within the age range [51-59](age_preference)
+      - I favor an age range of [52-60](age_preference)
+      - I'm drawn to individuals in the [53-61](age_preference) bracket
+      - I prefer someone in the [54-62](age_preference) range
+      - I lean towards dating someone aged [55-63](age_preference)
+      - My ideal age range is [56-64](age_preference)
+      - I look for partners between [57-65](age_preference)
+      - I enjoy connecting with people in the [58-66](age_preference) range
+      - I appreciate an age range of [59-67](age_preference)
+      - I'm interested in individuals aged [60-68](age_preference)
+      - My sweet spot is [61-69](age_preference)
+      - I prefer dating someone between [62-70](age_preference)
+      - I like partners aged [63-71](age_preference)
+      - I'm attracted to people in the [64-72](age_preference) range
+      - I favor an age bracket of [65-73](age_preference)
+      - My ideal match falls within [66-74](age_preference)
+      - I lean towards individuals aged [67-75](age_preference)
+      - I enjoy dating those in the [68-76](age_preference) range
+      - I'm interested in a partner who is between [69-77](age_preference)
+  - intent: provide_height
+    examples: |
+      - I'm [5'10"](height)
+      - My height is [170 cm](height)
+      - [5.8](height)
+      - I am [6 feet](height)
+      - Standing at [180 cm](height)
+      - I'm about [5'6"](height)
+      - My height is [165 cm](height)
+      - I measure [5'11"](height)
+      - I'm [5'4"](height)
+      - I'm [5'5"](height)
+      - I'm [5'7"](height)
+      - I'm [5'8"](height)
+      - I'm [5'9"](height)
+      - I'm [6'0"](height)
+      - I'm [6'1"](height)
+      - I'm [6'2"](height)
+      - I'm [6'3"](height)
+      - My height is [160 cm](height)
+      - My height is [162 cm](height)
+      - My height is [164 cm](height)
+      - My height is [166 cm](height)
+      - My height is [168 cm](height)
+      - My height is [172 cm](height)
+      - My height is [174 cm](height)
+      - My height is [176 cm](height)
+      - My height is [178 cm](height)
+      - My height is [182 cm](height)
+      - My height is [184 cm](height)
+      - My height is [186 cm](height)
+      - I measure [188 cm](height)
+      - I stand at [190 cm](height)
+      - I'm [5.2 ft](height)
+      - I'm [5.3 ft](height)
+      - I'm [5.6 ft](height)
+      - I'm [5.10 ft](height)
+      - I'm [6.0 ft](height)
+      - I'm [6.4 ft](height)
+      - I'm [6.5 ft](height)
+      - I am [1.65 m](height)
+      - I am [1.70 m](height)
+      - I am [1.75 m](height)
+      - I am [1.80 m](height)
+      - I am [1.85 m](height)
+      - I measure [1.90 m](height)
+      - I'm about [170 centimeters](height)
+      - I stand around [175 centimeters](height)
+      - My height is approximately [180 centimeters](height)
+      - I am roughly [185 centimeters](height)
+      - I clock in at [5 feet 6 inches](height)
+      - I measure [5 feet 9 inches](height)
+      - I stand at [6 feet 0 inches](height)
+      - I'm [6 feet 2 inches](height)
+      - My height comes to [5 feet 7 inches](height)
+      - I am [5 feet 11 inches](height)
+      - I am [6 feet 1 inch](height)
+      - I'm around [5.8 feet](height)
+  - intent: provide_user_info
+    examples: |
+      - I'm [outgoing](user_detail) and [love to travel](user_detail)
+      - I enjoy [reading](user_detail) and [watching movies](user_detail)
+      - I'm [creative](user_detail) and [adventurous](user_detail)
+      - I love [hiking](user_detail) and [cooking](user_detail)
+      - I'm [passionate](user_detail) about [music](user_detail) and [art](user_detail)
+      - I consider myself [curious](user_detail) and [fun-loving](user_detail)
+      - I have a [laid-back](user_detail) personality and enjoy [sports](user_detail)
+      - I'm a [bookworm](user_detail) who also likes [exploring](user_detail)
+      - I'm [sociable](user_detail) and [energetic](user_detail)
+      - I am [friendly](user_detail) and [open-minded](user_detail)
+      - I'm [ambitious](user_detail) and [driven](user_detail)
+      - I consider myself [intelligent](user_detail) and [witty](user_detail)
+      - I'm [compassionate](user_detail) and [empathetic](user_detail)
+      - I love [dancing](user_detail) and [singing](user_detail)
+      - I'm [artistic](user_detail) and [expressive](user_detail)
+      - I enjoy [cooking](user_detail) and [baking](user_detail)
+      - I'm [tech-savvy](user_detail) and [innovative](user_detail)
+      - I have a [quirky](user_detail) and [funny](user_detail) side
+      - I'm [charming](user_detail) and [humorous](user_detail)
+      - I'm [thoughtful](user_detail) and [reflective](user_detail)
+      - I am [spontaneous](user_detail) and [adventurous](user_detail)
+      - I'm [organized](user_detail) and [detail-oriented](user_detail)
+      - I'm [athletic](user_detail) and [active](user_detail)
+      - I love [gaming](user_detail) and [streaming](user_detail)
+      - I'm [nature-loving](user_detail) and [environmentally conscious](user_detail)
+      - I'm [independent](user_detail) and [self-reliant](user_detail)
+      - I enjoy [photography](user_detail) and [traveling](user_detail)
+      - I'm [curious](user_detail) and [inquisitive](user_detail)
+      - I'm [chill](user_detail) and [laid-back](user_detail)
+      - I consider myself [optimistic](user_detail) and [cheerful](user_detail)
+      - I'm [realistic](user_detail) and [pragmatic](user_detail)
+      - I love [exploring new cuisines](user_detail) and [trying new recipes](user_detail)
+      - I'm [social](user_detail) and [extroverted](user_detail)
+      - I'm [reserved](user_detail) and [thoughtful](user_detail)
+      - I'm [romantic](user_detail) and [passionate](user_detail)
+      - I enjoy [jogging](user_detail) and [cycling](user_detail)
+      - I'm [mindful](user_detail) and [spiritual](user_detail)
+      - I consider myself [adventurous](user_detail) and [daring](user_detail)
+      - I'm [fun](user_detail) and [energetic](user_detail)
+      - I have a [curious](user_detail) mind and am [philosophical](user_detail)
+      - I'm [tech-oriented](user_detail) and [innovative](user_detail)
+      - I'm [bookish](user_detail) and [learned](user_detail)
+      - I'm [inquisitive](user_detail) and [analytical](user_detail)
+      - I love [yoga](user_detail) and [meditation](user_detail)
+      - I'm [fashionable](user_detail) and [stylish](user_detail)
+      - I enjoy [attending concerts](user_detail) and [music festivals](user_detail)
+      - I'm [driven](user_detail) and [ambitious](user_detail)
+      - I am [diligent](user_detail) and [persistent](user_detail)
+      - I'm [cheerful](user_detail) and [joyful](user_detail)
+      - I love [volunteering](user_detail) and [giving back](user_detail)
+      - I'm [motivated](user_detail) and [goal-oriented](user_detail)
+      - I consider myself [thought-provoking](user_detail) and [creative](user_detail)
+      - I'm [open-minded](user_detail) and [accepting](user_detail)
+      - I'm [friendly](user_detail) and [approachable](user_detail)
+      - I enjoy [learning languages](user_detail) and [studying cultures](user_detail)
+      - I'm [energetic](user_detail) and [vibrant](user_detail)
+      - I have a [funny](user_detail) side and a [sincere](user_detail) personality
+      - I'm [versatile](user_detail) and [adaptable](user_detail)
+  - intent: provide_user_preferences
+    examples: |
+      - I'm looking for someone who is [kind](preference) and [empathetic](preference)
+      - I prefer someone who is [funny](preference) and [honest](preference)
+      - I want a partner who is [active](preference) and [intelligent](preference)
+      - Seeking someone [supportive](preference)
+      - I desire a partner who is [ambitious](preference) and [caring](preference)
+      - Looking for someone who is [adventurous](preference) and [reliable](preference)
+      - I like people who are [open-minded](preference) and [thoughtful](preference)
+      - My ideal partner is [confident](preference) yet [humble](preference)
+      - I'm interested in someone who is [funny](preference) and [charming](preference)
+      - I seek a partner who is [loyal](preference) and [trustworthy](preference)
+      - I desire someone who is [adventurous](preference) and [spontaneous](preference)
+      - I'm looking for someone who is [intelligent](preference) and [curious](preference)
+      - I want a partner who is [sincere](preference) and [genuine](preference)
+      - I'm interested in someone who is [compassionate](preference) and [understanding](preference)
+      - I prefer someone who is [creative](preference) and [imaginative](preference)
+      - I'm seeking someone who is [fun-loving](preference) and [playful](preference)
+      - I desire a partner who is [supportive](preference) and [caring](preference)
+      - I want someone who is [ambitious](preference) and [driven](preference)
+      - I appreciate someone who is [articulate](preference) and [eloquent](preference)
+      - I prefer a partner who is [optimistic](preference) and [positive](preference)
+      - I'm looking for someone who is [down-to-earth](preference) and [realistic](preference)
+      - I desire someone who is [passionate](preference) and [energetic](preference)
+      - I want a partner who is [intuitive](preference) and [insightful](preference)
+      - I'm interested in someone who is [warm](preference) and [affectionate](preference)
+      - I seek someone who is [mature](preference) and [responsible](preference)
+      - I prefer a partner who is [fun](preference) and [lively](preference)
+      - I desire someone who is [romantic](preference) and [passionate](preference)
+      - I'm looking for someone who is [respectful](preference) and [polite](preference)
+      - I want a partner who is [independent](preference) and [self-sufficient](preference)
+      - I appreciate someone who is [adventurous](preference) and [curious](preference)
+      - I seek someone who is [energetic](preference) and [dynamic](preference)
+      - I desire a partner who is [gentle](preference) and [caring](preference)
+      - I'm interested in someone who is [real](preference) and [honest](preference)
+      - I look for someone who is [vibrant](preference) and [enthusiastic](preference)
+      - I prefer a partner who is [sincere](preference) and [loyal](preference)
+      - I desire someone who is [patient](preference) and [understanding](preference)
+      - I'm looking for someone who is [fun](preference) and [creative](preference)
+      - I want a partner who is [courageous](preference) and [strong](preference)
+      - I appreciate someone who is [gentle](preference) and [kind](preference)
+      - I seek a partner who is [curious](preference) and [intellectual](preference)
+      - I desire someone who is [independent](preference) and [confident](preference)
+      - I'm looking for someone who is [adventurous](preference) and [free-spirited](preference)
+      - I want a partner who is [nurturing](preference) and [supportive](preference)
+      - I appreciate someone who is [witty](preference) and [sharp](preference)
+      - I prefer a partner who is [caring](preference) and [compassionate](preference)
+      - I desire someone who is [optimistic](preference) and [cheerful](preference)
+      - I'm interested in someone who is [sensitive](preference) and [gentle](preference)
+      - I seek a partner who is [fun](preference) and [humorous](preference)
+      - I want someone who is [realistic](preference) and [pragmatic](preference)
+      - I appreciate a partner who is [ambitious](preference) and [determined](preference)
+      - I'm looking for someone who is [open](preference) and [transparent](preference)
+      - I desire someone who is [empathetic](preference) and [compassionate](preference)
+      - I want a partner who is [joyful](preference) and [inspiring](preference)
+      - I prefer someone who is [relaxed](preference) and [easygoing](preference)
+      - I'm interested in someone who is [adventurous](preference) and [versatile](preference)
+      - I seek a partner who is [intelligent](preference) and [creative](preference)
+      - I desire someone who is [reliable](preference) and [steadfast](preference)
+      - I'm looking for someone who is [kind-hearted](preference) and [caring](preference)
+  - intent: provide_deal_breakers
+    examples: |
+      - I can't stand [smoking](deal_breaker)
+      - [Poor communication](deal_breaker) is a deal breaker
+      - I won't date someone [rude](deal_breaker)
+      - [Dishonesty](deal_breaker) is unacceptable
+      - I don't tolerate [laziness](deal_breaker)
+      - [Arrogance](deal_breaker) is a no-go for me
+      - I avoid people with [bad habits](deal_breaker)
+      - [Inconsistency](deal_breaker) is a deal breaker
+      - I cannot stand [cheating](deal_breaker)
+      - I refuse to date someone who is [selfish](deal_breaker)
+      - I have no tolerance for [negativity](deal_breaker)
+      - I won't be with someone who is [controlling](deal_breaker)
+      - I avoid people who are [manipulative](deal_breaker)
+      - I don't like [insecurity](deal_breaker) in a partner
+      - I steer clear of those with [addictive behaviors](deal_breaker)
+      - I won't consider someone who is [arrogant](deal_breaker)
+      - I can't handle [dishonesty](deal_breaker)
+      - I won't date someone with [poor hygiene](deal_breaker)
+      - I avoid partners who are [unreliable](deal_breaker)
+      - I dislike people who are [inconsiderate](deal_breaker)
+      - I find [self-centeredness](deal_breaker) unacceptable
+      - I refuse relationships with [narcissistic](deal_breaker) individuals
+      - I won't engage with someone who is [jealous](deal_breaker)
+      - I can't tolerate [overly critical](deal_breaker) behavior
+      - I avoid people with [temper issues](deal_breaker)
+      - I dislike [disrespect](deal_breaker) in any form
+      - I won't be with someone who is [uncommunicative](deal_breaker)
+      - I have a problem with [lazy behavior](deal_breaker)
+      - I won't date someone who is [unmotivated](deal_breaker)
+      - I avoid individuals with [bad attitudes](deal_breaker)
+      - I can't stand [clinginess](deal_breaker)
+      - I steer clear of those who are [overbearing](deal_breaker)
+      - I won't be with someone who exhibits [passive-aggressiveness](deal_breaker)
+      - I find [indecisiveness](deal_breaker) off-putting
+      - I avoid partners with [excessive ego](deal_breaker)
+      - I cannot tolerate [untrustworthiness](deal_breaker)
+      - I won't consider someone with [a lack of ambition](deal_breaker)
+      - I have zero patience for [argumentative](deal_breaker) behavior
+      - I steer clear of individuals with [inflexibility](deal_breaker)
+      - I find [recklessness](deal_breaker) a deal breaker
+      - I won't date someone with [poor manners](deal_breaker)
+      - I avoid people who are [unsupportive](deal_breaker)
+      - I can't deal with [self-absorption](deal_breaker)
+      - I have issues with [unreliable behavior](deal_breaker)
+      - I won't tolerate [disorganization](deal_breaker)
+      - I steer clear of individuals who are [demanding](deal_breaker)
+      - I avoid those with [excessive drama](deal_breaker)
+      - I can't stand [intolerance](deal_breaker)
+      - I refuse to date someone who is [unempathetic](deal_breaker)
+      - I won't be with someone who is [overly competitive](deal_breaker)
+      - I avoid partners with [a lack of humor](deal_breaker)
+      - I can't deal with [chronic lateness](deal_breaker)
+      - I won't date someone who is [cynical](deal_breaker)
+      - I avoid individuals who are [immature](deal_breaker)
+      - I can't stand [disloyalty](deal_breaker)
+      - I won't consider a relationship with someone who is [emotionally unavailable](deal_breaker)
+  - intent: request_topic_change
+    examples: |
+      - Can we talk about something else?
+      - Let's move on
+      - I'd like to discuss a different topic
+      - Change the subject please
+      - Let's switch topics
+      - I'm tired of this topic
+      - Can we change the subject now?
+      - I want to talk about something else
+      - Can we discuss another subject?
+      - Let's change the topic.
+      - I'd prefer to talk about something new.
+      - Can we switch the conversation?
+      - Let's move to another topic.
+      - I'm ready for a new subject.
+      - Could we discuss something different?
+      - I think it's time to change the subject.
+      - Let's shift our conversation.
+      - I'm over this topic, can we move on?
+      - Let's talk about something else.
+      - I'd like to switch topics.
+      - How about a new subject?
+      - Can we steer the conversation in a new direction?
+      - Let's leave this topic behind.
+      - I want to talk about something else.
+      - This topic is getting old, can we change it?
+      - Let's go in a different direction.
+      - Can we explore a new topic?
+      - Let's change our focus.
+      - I'm ready to discuss a different matter.
+      - Let's transition to another topic.
+      - Can we talk about another subject?
+      - I'm not interested in this anymore, let's change topics.
+      - Let's divert to a different conversation.
+      - I want to switch the subject now.
+      - Let's leave this discussion and move on.
+      - How about we talk about something else?
+      - I'm bored with this topic, let's change.
+      - Could we move on to a new subject?
+      - Let's discuss something else.
+      - Can we move to a different topic?
+      - I'm ready for a topic change.
+      - Let's bring up a new subject.
+      - I need a change of subject, please.
+      - Let's pivot to another discussion.
+      - Can we transition to another matter?
+      - I think we should change the subject.
+      - Let's pick a different topic.
+      - I'm ready to shift gears and talk about something new.
+      - Can we explore a different conversation?
+      - Let's get off this topic.
+      - I'm interested in discussing another matter.
+      - Let's turn to another subject.
+      - I prefer to talk about something else now.
+      - How about we change our discussion?
+      - Let's move away from this topic.
+      - I want to switch the conversation topic.
+      - Can we discuss a new idea?
+      - Let's set this topic aside and talk about something else.
+  - intent: request_skip
+    examples: |
+      - skip
+      - skip this
+      - skip this section
+      - skip this part
+      - can we skip this
+      - I want to skip this
+      - let's skip this
+      - next section
+      - go to next section
+      - move to next section
+      - I don't want to provide this information
+      - can we move on to the next part
+      - let's move on to the next section
+      - I'd rather not answer these questions
+      - skip to the next part
+      - I prefer not to say
+      - I'd rather not share that
+      - can we move forward
+      - let's continue to the next part
+      - next please
+      - continue to next
+      - proceed to next section
+      - let's go to the next part
+      - I'll skip this one
+      - not comfortable sharing this
+      - I don't feel like answering that
+      - skip for now
+      - can we skip for now
+      - let's skip for now
+      - move forward
+      - next topic please
+      - let's talk about something else
+      - can we talk about something else
+      - I want to move on
+      - I don't wish to answer this question.
+      - Let's pass on this one.
+      - I'll pass on this question.
+      - Can we omit this part?
+      - Let's bypass this section.
+      - I'm going to skip this question.
+      - I'd like to move past this.
+      - This section, please skip.
+      - No answer for this, let's continue.
+      - I'd rather not go into that.
+      - I'll leave this part unanswered.
+      - Please skip this question.
+      - I prefer to skip this section.
+      - Let's not cover this.
+      - I want to pass on this topic.
+      - I'll pass on this part.
+      - Skipping this, please.
+      - Let's move on without this.
+      - I choose not to answer this.
+      - Let's continue without this section.
+      - I don't have a response for this, moving on.
+      - Next question, please.
+      - I won't answer this one.
+      - I decline to answer that.
+      - This one I'll skip.
+      - Let's leave this unanswered.
+      - I'll opt to skip this question.
+      - Not answering this, moving on.
+      - Can we ignore this part?
+      - Skipping over this, please.
+      - I don't feel like discussing that.
+      - Let's jump to the next.
+      - This part isn't for me, skipping.
+      - I'd rather skip this item.
+      - I don't want to answer that one.
+      - Pass on this, please.
+      - Let's omit this detail.
+      - I won't provide an answer for this.
+      - This doesn't need an answer, skipping.
+      - Let's proceed without this part.
+      - I choose to bypass this question.
+      - I'll not answer this and move on.
+      - Let's move forward, skipping this.
+      - I'm going to leave this part.
+      - I would prefer to skip that.
+      - Not addressing this, next please.
+      - I'll pass on giving details here.
+      - I don't have a comment for this, moving on.
+      - Let's change to the next question.
+      - I opt out of answering that.
+  - intent: affirm
+    examples: |
+      - yes
+      - sure
+      - indeed
+      - absolutely
+      - that's right
+      - yep
+      - of course
+      - definitely
+      - Yeah
+      - Yup
+      - Certainly
+      - Absolutely yes
+      - For sure
+      - Definitely
+      - Sure thing
+      - Affirmative
+      - Without a doubt
+      - Sure, why not
+      - Indeed
+      - Absolutely
+      - Positively
+      - Of course
+      - You bet
+      - Totally
+      - Undoubtedly
+      - Certainly so
+      - Yes indeed
+      - By all means
+      - Yes, absolutely
+      - Yep, for sure
+      - Sure
+      - Yes, definitely
+      - Absolutely, indeed
+      - Sure, indeed
+      - Without question
+      - Yes, I agree
+      - I certainly do
+      - I agree
+      - I affirm
+      - Yep, absolutely
+      - Definitely yes
+      - Yes, of course
+      - Absolutely, yes
+      - Sure, that's right
+      - Right on
+      - Sure thing, absolutely
+      - I certainly agree
+      - Yes, I do
+      - Indeed, yes
+      - Yes, that's correct
+      - Absolutely, that's right
+      - Yes, indeed
+      - Totally yes
+      - Yes, without hesitation
+      - I wholeheartedly agree
+      - Yes, affirmatively
+      - For sure, yes
+      - Yes, positively
+  - intent: deny
+    examples: |
+      - no
+      - not really
+      - I don't think so
+      - nope
+      - nah
+      - I disagree
+      - not at all
+      - No way
+      - Absolutely not
+      - Not at all
+      - I don't agree
+      - Certainly not
+      - No, thanks
+      - I disagree
+      - Nope
+      - Nah
+      - Not really
+      - I don't think so
+      - Definitely not
+      - Not in the slightest
+      - No, I don't
+      - I'm not convinced
+      - I don't feel that way
+      - No, that's not true
+      - Not by any means
+      - I must disagree
+      - I cannot agree
+      - I do not agree
+      - Not at all, sorry
+      - No, absolutely not
+      - I don't see it that way
+      - No, I don't think so
+      - No, I disagree with that
+      - Not in my opinion
+      - I'm not on board with that
+      - I don't support that
+      - I'm not a fan
+      - Not for me
+      - No, that's not right
+      - I can't agree
+      - No, I really don't
+      - I don't think that's true
+      - No, that won't work for me
+      - Not my cup of tea
+      - I must say no
+      - I oppose that
+      - No, I have to disagree
+      - No, I don't buy it
+      - I don't feel comfortable with that
+      - I respectfully disagree
+      - I'm going to pass on that
+      - Not interested
+      - No, thanks, not really
+      - No, I decline
+      - I'm not in favor
+      - No, that's not acceptable
+      - I don't agree with it
+  - intent: out_of_scope
+    examples: |
+      - What's the weather?
+      - Tell me a joke
+      - Order me a pizza
+      - How do I reset my password?
+      - What time is it?
+      - Play some music
+      - Give me a news update
+      - How do I change my email?
+      - Can you recommend a restaurant?
+      - What's the latest stock market update?
+      - Find me a recipe for pasta.
+      - How do I update my profile picture?
+      - What's the current time?
+      - What's the forecast for tomorrow?
+      - Tell me a fun fact.
+      - Play a song for me.
+      - Who won the game last night?
+      - Set an alarm for 7 AM.
+      - What's the capital of France?
+      - How do I change my password?
+      - What's the date today?
+      - Can you book a cab for me?
+      - What's on my calendar?
+      - Show me today's news.
+      - Find nearby coffee shops.
+      - What's the score of the match?
+      - Call my friend.
+      - Open the settings menu.
+      - Send a message to John.
+      - Turn off the lights.
+      - What movie should I watch?
+      - Recommend a book.
+      - How do I reset my router?
+      - What's the traffic like?
+      - Order me a coffee.
+      - What's my horoscope?
+      - Find a nearby gym.
+      - What's the exchange rate?
+      - Tell me a riddle.
+      - What song is playing?
+      - Translate this text.
+      - Find me a doctor.
+      - Schedule a meeting.
+      - Show me the weather forecast.
+      - How do I install an app?
+      - Find a good restaurant nearby.
+      - What's the latest trend?
+      - Can you set a reminder for me?
+      - How do I delete my account?
+      - Tell me today's date.
+      - What's the news?
+      - Open my email.
+      - Check my messages.
+      - How do I update my app?
+      - What's the temperature outside?
+      - What's the air quality index?
+      - Find me a nearby hospital.
+      - How do I change my ringtone?
+  - intent: export_conversation
+    examples: |
+      - export our conversation
+      - save our chat
+      - download this conversation
+      - give me a record of our conversation
+      - export data
+      - I want to export our chat
+      - can I get a copy of this conversation
+      - export my profile data
+      - export my information
+      - save our discussion
+      - download chat history
+      - export this conversation
+      - save my profile
+      - backup our chat
+      - provide me with a copy of our conversation
+      - can you export this chat
+      - export profile
+      - I need a copy of this conversation
+      - save all my information
+      - download our chat

@@ -1,0 +1,13 @@
+{
+  "test": true,
+  "metadata": {
+    "name": "Test User 6",
+    "age": 35,
+    "gender": "female",
+    "assistant_id": "dating_profile_assistant",
+    "last_updated": "2025-03-21T20:56:29.312315",
+    "triggered_by_rule": true,
+    "action_update_timestamp": "2025-03-21T20:56:29.312328"
+  },
+  "timestamp": "2025-03-21T20:56:29.313306"
+}

@@ -1,0 +1,227 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - provide_name
+  - provide_age
+  - provide_gender
+  - provide_gender_preference
+  - provide_age_preference
+  - provide_height
+  - provide_user_info
+  - provide_user_preferences
+  - provide_deal_breakers
+  - request_topic_change
+  - request_skip
+  - nlu_fallback
+  - out_of_scope
+  - export_conversation
+
+entities:
+  - name
+  - age
+  - gender
+  - gender_preference
+  - age_preference
+  - height
+  - user_detail
+  - preference
+  - deal_breaker
+
+slots:
+  chat_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+  
+  age:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: age
+  
+  gender:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: gender
+  
+  gender_preference:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: gender_preference
+  
+  age_preference:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: age_preference
+  
+  height:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: height
+  
+  current_section:
+    type: categorical
+    values:
+      - personalData
+      - userInfo
+      - userPref
+    influence_conversation: true
+    mappings:
+      - type: custom
+  
+  current_topic:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+      
+  personal_data_stage:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+      
+  dob:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+      
+  userInfo_stage_start:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: custom
+      
+  userPref_stage_start:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: custom
+      
+  topic_transition:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: custom
+      
+  followup_count:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+      
+  match_ready:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+responses:
+  utter_greet:
+  - text: "Hi there! I'm Hapa, your friendly assistant. Let's start building your perfect profile! 🐾"
+
+  utter_ask_name:
+  - text: "Could you please tell me your name?"
+
+  utter_ask_age:
+  - text: "How old are you?"
+
+  utter_ask_gender:
+  - text: "What's your gender?"
+
+  utter_ask_gender_preference:
+  - text: "What's your gender preference for dating?"
+
+  utter_ask_age_preference:
+  - text: "What age range are you looking for in a partner?"
+
+  utter_ask_height:
+  - text: "What's your height?"
+
+  utter_ask_user_info:
+  - text: "Tell me a bit about yourself. What are your interests, hobbies, or personality traits?"
+
+  utter_ask_user_preferences:
+  - text: "What qualities are you looking for in a partner?"
+
+  utter_ask_deal_breakers:
+  - text: "Are there any deal breakers you have when it comes to potential partners?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye! Good luck with your dating journey!"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa. I'm here to help you create a great dating profile!"
+
+  utter_default:
+  - text: ""
+  
+  utter_transition_to_userInfo:
+  - text: "Hehe I've gathered lots of helpful info so far ( =^･ω･^= )! Now we'd love to learn more about you. It could be about your personality, interests, lifestyle, values, experiences or anything else you'd like to share so I can find you a purr-fect match!🐾✨"
+  
+
+  utter_transition_to_userInfo_about_skip:
+  - text: "By the way,if you ever feel like moving on, just let me know and we can jump straight to discussing your partner preferences!🐾"
+  
+  utter_transition_question:
+  - text: "Great! You've shared a lot about yourself. Would you like to move on to discuss your preferences in a partner?"
+
+actions:
+  - action_log_conversation
+  - action_export_conversation
+  - action_collect_name
+  - action_collect_age
+  - action_collect_gender
+  - action_collect_gender_preference
+  - action_collect_age_preference
+  - action_collect_height
+  - action_analyze_user_info
+  - action_determine_next_topic
+  - action_generate_response_user_info
+  - action_analyze_user_preferences
+  - action_generate_response_user_pref
+  - action_determine_user_intent
+  - action_end_conversation
+  - action_switch_to_user_info
+  - action_switch_to_user_preferences
+  - action_update_metadata
+  - action_ollama_fallback
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -1,0 +1,49 @@
+recipe: default.v1
+
+# The assistant project unique identifier
+# This default value must be replaced with a unique assistant name within your deployment
+assistant_id: dating_profile_assistant
+
+language: en
+
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier
+    epochs: 100
+    constrain_similarities: true
+    entity_recognition: true
+    intent_classification: true
+    transformer_size: 256
+    number_of_transformer_layers: 2
+    number_of_attention_heads: 4
+    hidden_layers_sizes:
+      text: [256, 128]
+      label: [256, 128]
+    dropout_rate: 0.2
+    weight_sparsity: 0.0
+    use_masked_language_model: true
+    evaluate_on_number_of_examples: 0
+    evaluate_every_number_of_epochs: 10
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+    epochs: 100
+    constrain_similarities: true
+  - name: FallbackClassifier
+    threshold: 0.7
+    ambiguity_threshold: 0.1
+
+policies:
+  - name: MemoizationPolicy
+    max_history: 5
+  - name: RulePolicy
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+    constrain_similarities: true

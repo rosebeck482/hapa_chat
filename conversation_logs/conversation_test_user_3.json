@@ -1,0 +1,29 @@
+{
+  "conversation_id": "test_user_3",
+  "created_at": "2025-03-21T20:29:29.782468",
+  "updated_at": "2025-03-21T20:29:29.782476",
+  "metadata": {
+    "name": "Test User 3",
+    "age": 25,
+    "gender": "female",
+    "test_timestamp": "2025-03-21T20:29:29.782437",
+    "direct_test": true
+  },
+  "messages": [
+    {
+      "timestamp": "2025-03-21T20:29:29.782471",
+      "section": "system",
+      "sender": "system",
+      "content": "Metadata updated: name, age, gender, test_timestamp, direct_test",
+      "metadata": {
+        "metadata_updated": {
+          "name": "Test User 3",
+          "age": 25,
+          "gender": "female",
+          "test_timestamp": "2025-03-21T20:29:29.782437",
+          "direct_test": true
+        }
+      }
+    }
+  ]
+}

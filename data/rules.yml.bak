@@ -1,0 +1,66 @@
+version: "3.1"
+
+rules:
+
+
+  - rule: Transition to user info after personal data collection
+    condition:
+      - slot_was_set:
+          - personal_data_stage: 7
+    steps:
+      - action: utter_transition_to_userInfo
+      - action: utter_transition_to_userInfo_about_skip
+      - action: action_update_metadata
+      - slot_was_set:
+          - current_section: "userInfo"
+          - userInfo_stage_start: true
+      - action: action_listen
+
+  - rule: End conversation when user says goodbye
+    steps:
+      - intent: goodbye
+      - action: action_end_conversation
+      - slot_was_set:
+          - match_ready: true
+      - action: action_listen
+
+  - rule: Handle out-of-scope messages
+    steps:
+      - intent: out_of_scope
+      - action: action_ollama_fallback
+      - action: action_listen
+
+  - rule: Handle all fallbacks
+    steps:
+      - intent: nlu_fallback
+      - action: action_ollama_fallback
+      - action: action_listen
+
+  - rule: Skip personal data collection
+    steps:
+      - intent: request_skip
+      - slot_was_set:
+          - personal_data_stage: 1
+          - personal_data_stage: 2
+          - personal_data_stage: 3
+          - personal_data_stage: 4
+          - personal_data_stage: 5
+          - personal_data_stage: 6
+      - action: action_switch_to_user_info
+      - action: action_listen
+
+  - rule: Skip user info section
+    condition:
+      - slot_was_set:
+          - current_section: "userInfo"
+    steps:
+      - intent: request_skip
+      - action: action_switch_to_user_preferences
+      - action: action_listen
+
+  - rule: Export conversation when requested
+    steps:
+      - intent: export_conversation
+      - action: action_export_conversation
+      - action: action_listen
+

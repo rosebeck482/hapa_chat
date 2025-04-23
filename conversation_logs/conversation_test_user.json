@@ -1,0 +1,73 @@
+{
+  "conversation_id": "test_user",
+  "created_at": "2025-04-21T01:39:52.069643",
+  "updated_at": "2025-04-21T01:41:01.356184",
+  "metadata": {
+    "name": "Rose",
+    "personal_data_stage": 2,
+    "age": "19"
+  },
+  "messages": [
+    {
+      "timestamp": "2025-04-21T01:39:52.069666",
+      "section": "greeting",
+      "sender": "bot",
+      "content": "Sorry, I encountered an error while generating a response.",
+      "metadata": {
+        "action": "",
+        "data": {}
+      }
+    },
+    {
+      "timestamp": "2025-04-21T01:39:58.476669",
+      "section": "greeting",
+      "sender": "bot",
+      "content": "Sorry, I encountered an error while generating a response.",
+      "metadata": {
+        "action": "",
+        "data": {}
+      }
+    },
+    {
+      "timestamp": "2025-04-21T01:41:01.355016",
+      "section": "personal_data_collection",
+      "sender": "user",
+      "content": "19",
+      "metadata": {
+        "intent": "provide_age",
+        "confidence": 0.9902732968330383,
+        "entities": []
+      }
+    },
+    {
+      "timestamp": "2025-04-21T01:41:01.355759",
+      "section": "personal_data_collection",
+      "sender": "bot",
+      "content": "How old are you?",
+      "metadata": {
+        "action": "action_listen",
+        "data": {
+          "elements": null,
+          "quick_replies": null,
+          "buttons": null,
+          "attachment": null,
+          "image": null,
+          "custom": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-04-21T01:41:01.356178",
+      "section": "system",
+      "sender": "system",
+      "content": "Metadata updated: name, personal_data_stage, age",
+      "metadata": {
+        "metadata_updated": {
+          "name": "Rose",
+          "personal_data_stage": 2,
+          "age": "19"
+        }
+      }
+    }
+  ]
+}

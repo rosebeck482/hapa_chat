@@ -1,0 +1,246 @@
+version: "3.1"
+
+stories:
+  # Personal Data Collection Flow
+  - story: Say hello when user greets
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_ask_name
+      - slot_was_set:
+          - personal_data_stage: 1
+      - action: action_listen
+      - action: action_log_conversation
+    
+  - story: personal data collection - name
+    steps:
+      - intent: provide_name
+      - action: action_collect_name
+      - slot_was_set:
+          - name: "extracted_name"
+          - personal_data_stage: 2
+      - action: action_listen
+      - action: action_log_conversation
+
+  - story: personal data collection - age
+    steps:
+      - intent: provide_age
+      - action: action_collect_age
+      - slot_was_set:
+          - age: "extracted_age"
+          - dob: "inferred_dob"  # calculated from age in your action
+          - personal_data_stage: 3
+      - action: action_listen
+      - action: action_log_conversation
+
+  - story: personal data collection - gender
+    steps:
+      - intent: provide_gender
+      - action: action_collect_gender
+      - slot_was_set:
+          - gender: "extracted_gender"
+          - personal_data_stage: 4
+      - action: utter_ask_gender_preference
+      - action: action_listen
+      - action: action_log_conversation
+
+  - story: personal data collection - gender preference
+    steps:
+      - intent: provide_gender_preference
+      - action: action_collect_gender_preference
+      - slot_was_set:
+          - gender_preference: "extracted_gender_preference"
+          - personal_data_stage: 5
+      - action: utter_ask_age_preference
+      - action: action_listen
+      - action: action_log_conversation
+
+  - story: personal data collection - age preference
+    steps:
+      - intent: provide_age_preference
+      - action: action_collect_age_preference
+      - slot_was_set:
+          - age_preference: "extracted_age_preference"
+          - personal_data_stage: 6
+      - action: utter_ask_height
+      - action: action_listen
+      - action: action_log_conversation
+
+  - story: personal data collection - height
+    steps:
+      - intent: provide_height
+      - action: action_collect_height
+      - slot_was_set:
+          - height: "extracted_height"
+          - personal_data_stage: 7
+          - current_section: "userInfo"
+      - action: utter_transition_to_userInfo
+      - action: utter_transition_to_userInfo_about_skip
+      - action: action_update_metadata
+      - slot_was_set:
+          - userInfo_stage_start: true
+      - action: action_listen
+      - action: action_log_conversation
+
+  # User Info Collection Flow
+  - story: user info collection - start
+    steps:
+      - slot_was_set:
+          - current_section: "userInfo"
+          - userInfo_stage_start: true
+      - intent: provide_user_info
+      - action: action_analyze_user_info
+      - action: action_determine_next_topic
+      - action: action_generate_response_user_info
+      - action: action_listen
+
+  - story: user info collection - continue same topic
+    steps:
+      - slot_was_set:
+          - current_section: "userInfo"
+          - topic_transition: false
+      - intent: provide_user_info
+      - action: action_analyze_user_info
+      - action: action_determine_next_topic
+      - slot_was_set:
+          - followup_count: 1
+      - action: action_generate_response_user_info
+      - action: action_listen
+
+  - story: user info collection - transition to new topic
+    steps:
+      - slot_was_set:
+          - current_section: "userInfo"
+      - intent: provide_user_info
+      - action: action_analyze_user_info
+      - action: action_determine_next_topic
+      - slot_was_set:
+          - topic_transition: true
+          - current_topic: "new_topic"
+          - followup_count: 0
+      - action: action_generate_response_user_info
+      - action: action_listen
+
+  - story: user info collection - end section
+    steps:
+      - slot_was_set:
+          - current_section: "userInfo"
+          - current_topic: null
+      - intent: provide_user_info
+      - action: action_analyze_user_info
+      - action: action_determine_next_topic
+      - action: utter_transition_question
+      - action: action_listen
+      - intent: affirm
+      - action: action_determine_user_intent
+      - slot_was_set:
+          - current_section: "userPref"
+          - userPref_stage_start: true
+      - action: action_generate_response_user_pref
+      - action: action_listen
+
+  # User Preferences Collection Flow
+  - story: user preferences collection - start
+    steps:
+      - slot_was_set:
+          - current_section: "userPref"
+          - userPref_stage_start: true
+      - intent: provide_user_preferences
+      - action: action_analyze_user_preferences
+      - action: action_determine_next_topic
+      - action: action_generate_response_user_pref
+      - action: action_listen
+
+  - story: user preferences collection - continue same topic
+    steps:
+      - slot_was_set:
+          - current_section: "userPref"
+          - topic_transition: false
+      - intent: provide_user_preferences
+      - action: action_analyze_user_preferences
+      - action: action_determine_next_topic
+      - slot_was_set:
+          - followup_count: 1
+      - action: action_generate_response_user_pref
+      - action: action_listen
+
+  - story: user preferences collection - transition to new topic
+    steps:
+      - slot_was_set:
+          - current_section: "userPref"
+      - intent: provide_user_preferences
+      - action: action_analyze_user_preferences
+      - action: action_determine_next_topic
+      - slot_was_set:
+          - topic_transition: true
+          - current_topic: "new_topic"
+          - followup_count: 0
+      - action: action_generate_response_user_pref
+      - action: action_listen
+
+  - story: deal breakers collection
+    steps:
+      - slot_was_set:
+          - current_section: "userPref"
+          - current_topic: "deal_breakers"
+      - intent: provide_deal_breakers
+      - action: action_analyze_user_preferences
+      - action: action_determine_next_topic
+      - action: action_generate_response_user_pref
+      - action: action_listen
+
+  - story: end conversation
+    steps:
+      - slot_was_set:
+          - current_section: "userPref"
+          - current_topic: null
+      - intent: provide_user_preferences
+      - action: action_analyze_user_preferences
+      - action: action_determine_next_topic
+      - action: action_determine_user_intent
+      - intent: goodbye
+      - action: action_end_conversation
+      - slot_was_set:
+          - match_ready: true
+      - action: action_listen
+
+  # Topic Change Requests
+  - story: request to change from userInfo to userPref
+    steps:
+      - slot_was_set:
+          - current_section: "userInfo"
+          - topic_transition: true
+      - intent: request_topic_change
+      - action: action_determine_user_intent
+      - slot_was_set:
+          - current_section: "userPref"
+          - userPref_stage_start: true
+      - action: action_generate_response_user_pref
+      - action: action_listen
+
+  - story: request to change topic in userInfo
+    steps:
+      - slot_was_set:
+          - current_section: "userInfo"
+          - topic_transition: false
+      - intent: request_topic_change
+      - action: action_determine_next_topic
+      - slot_was_set:
+          - topic_transition: true
+          - current_topic: "new_topic"
+          - followup_count: 0
+      - action: action_generate_response_user_info
+      - action: action_listen
+
+  - story: request to change topic in userPref
+    steps:
+      - slot_was_set:
+          - current_section: "userPref"
+      - intent: request_topic_change
+      - action: action_determine_next_topic
+      - slot_was_set:
+          - topic_transition: true
+          - current_topic: "new_topic"
+          - followup_count: 0
+      - action: action_generate_response_user_pref
+      - action: action_listen
