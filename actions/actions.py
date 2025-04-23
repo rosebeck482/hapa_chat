@@ -1448,7 +1448,7 @@ class ActionOllamaFallback(Action):
             if not height and OLLAMA_AVAILABLE:
                 try:
                     logger.info(f"Using Ollama to interpret height from: '{message_text}'")
-                    client = ollama.Client(OLLAMA_API_HOST, OLLAMA_MODEL)
+                    client = ollama.Client(OLLAMA_API_HOST, OLLAMA_MODEL, timeout=300.0)  # Increase timeout to 300 seconds
                     
                     height_prompt = [
                         {"role": "system", "content": "You are a helpful assistant that extracts height information from user messages. Extract the height and convert it to a standard format (either X'Y\" or Zcm). If the input is just a number without units, determine if it's likely cm (if 150-220) or feet (if 4-7) based on the value. Return ONLY the formatted height value without any explanation or additional text."},
@@ -1515,7 +1515,7 @@ class ActionOllamaFallback(Action):
         if OLLAMA_AVAILABLE:
             try:
                 logger.info(f"Ollama is available, attempting to generate response with model: {OLLAMA_MODEL[:5]}...")
-                client = ollama.Client(OLLAMA_API_HOST, OLLAMA_MODEL)
+                client = ollama.Client(OLLAMA_API_HOST, OLLAMA_MODEL, timeout=300.0)  # Increase timeout to 300 seconds
                 
                 # Create a context-aware system message based on the current stage
                 system_message = "You are Hapa, a friendly dating profile assistant with a cat-like personality. You help users create their dating profiles by collecting information in a conversational way. You use cat puns and playful language. Keep responses brief and engaging."
