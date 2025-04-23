@@ -1,8 +1,6 @@
 # Virtual Environment
 venv/
 
-# Rasa cache
-.rasa/
 
 # Old Rasa models - keep only the latest
 models/20250420-*.tar.gz

@@ -1,0 +1,50 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"utter_transition_to_userInfo\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]": "utter_transition_to_userInfo_about_skip",
+      "[{\"prev_action\": {\"action_name\": \"utter_transition_to_userInfo\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}, {\"prev_action\": {\"action_name\": \"utter_transition_to_userInfo_about_skip\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]": "action_update_metadata",
+      "[{\"prev_action\": {\"action_name\": \"utter_transition_to_userInfo\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}, {\"prev_action\": {\"action_name\": \"utter_transition_to_userInfo_about_skip\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}, {\"prev_action\": {\"action_name\": \"action_update_metadata\"}, \"slots\": {\"current_section\": [0.0, 1.0, 0.0, 0.0], \"personal_data_stage\": [1.0, 1.0], \"userInfo_stage_start\": [1.0, 1.0]}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"slots\": {\"current_section\": [0.0, 1.0, 0.0, 0.0]}, \"user\": {\"intent\": \"request_skip\"}}]": "action_switch_to_user_preferences",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"slots\": {\"current_section\": [0.0, 1.0, 0.0, 0.0]}, \"user\": {\"intent\": \"request_skip\"}}, {\"prev_action\": {\"action_name\": \"action_switch_to_user_preferences\"}, \"slots\": {\"current_section\": [0.0, 1.0, 0.0, 0.0]}, \"user\": {\"intent\": \"request_skip\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"utter_ask_gender\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"goodbye\"}}]": "action_end_conversation",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"goodbye\"}}, {\"prev_action\": {\"action_name\": \"action_end_conversation\"}, \"slots\": {\"match_ready\": [1.0, 1.0]}, \"user\": {\"intent\": \"goodbye\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"out_of_scope\"}}]": "action_ollama_fallback",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"out_of_scope\"}}, {\"prev_action\": {\"action_name\": \"action_ollama_fallback\"}, \"user\": {\"intent\": \"out_of_scope\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"utter_ask_height\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"export_conversation\"}}]": "action_export_conversation",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"export_conversation\"}}, {\"prev_action\": {\"action_name\": \"action_export_conversation\"}, \"user\": {\"intent\": \"export_conversation\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"nlu_fallback\"}}]": "action_ollama_fallback",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"nlu_fallback\"}}, {\"prev_action\": {\"action_name\": \"action_ollama_fallback\"}, \"user\": {\"intent\": \"nlu_fallback\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"utter_ask_age\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}, \"user\": {\"intent\": \"request_skip\"}}]": "action_switch_to_user_info",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}, \"user\": {\"intent\": \"request_skip\"}}, {\"prev_action\": {\"action_name\": \"action_switch_to_user_info\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}, \"user\": {\"intent\": \"request_skip\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"greet\"}}]": "utter_greet",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"greet\"}}, {\"prev_action\": {\"action_name\": \"utter_greet\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}, \"user\": {\"intent\": \"greet\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"utter_ask_gender_preference\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"utter_ask_age_preference\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {},
+    "rules_not_in_stories": [
+      "predicting default action with intent back",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"out_of_scope\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}, \"user\": {\"intent\": \"request_skip\"}}, {\"prev_action\": {\"action_name\": \"action_switch_to_user_info\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}, \"user\": {\"intent\": \"request_skip\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"utter_ask_age\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"out_of_scope\"}}, {\"prev_action\": {\"action_name\": \"action_ollama_fallback\"}, \"user\": {\"intent\": \"out_of_scope\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"export_conversation\"}}, {\"prev_action\": {\"action_name\": \"action_export_conversation\"}, \"user\": {\"intent\": \"export_conversation\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}, \"user\": {\"intent\": \"request_skip\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"nlu_fallback\"}}, {\"prev_action\": {\"action_name\": \"action_ollama_fallback\"}, \"user\": {\"intent\": \"nlu_fallback\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"greet\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"export_conversation\"}}]",
+      "predicting default action with intent restart",
+      "predicting default action with intent session_start",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"nlu_fallback\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"greet\"}}, {\"prev_action\": {\"action_name\": \"utter_greet\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}, \"user\": {\"intent\": \"greet\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"slots\": {\"current_section\": [0.0, 1.0, 0.0, 0.0]}, \"user\": {\"intent\": \"request_skip\"}}, {\"prev_action\": {\"action_name\": \"action_switch_to_user_preferences\"}, \"slots\": {\"current_section\": [0.0, 1.0, 0.0, 0.0]}, \"user\": {\"intent\": \"request_skip\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"utter_ask_gender\"}, \"slots\": {\"personal_data_stage\": [1.0, 1.0]}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"slots\": {\"current_section\": [0.0, 1.0, 0.0, 0.0]}, \"user\": {\"intent\": \"request_skip\"}}]"
+    ]
+  }
+}
