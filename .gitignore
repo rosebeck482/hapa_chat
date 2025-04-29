@@ -1,5 +1,7 @@
 # Virtual Environment
 venv/
+memory-bank/
+.cursor/
 
 
 # Old Rasa models - keep only the latest

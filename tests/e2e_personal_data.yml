@@ -1,0 +1,377 @@
+version: "3.1"
+
+test_cases:
+  # TC-001: Complete Happy Path Flow
+  - test_case: happy_path_complete_flow
+    steps:
+      - user: "hello"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_greet
+          - bot_uttered:
+              utter_name: utter_ask_name
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 1
+
+      - user: "My name is John Smith"
+        assertions:
+          - slot_was_set:
+              - name: name
+                value: "John Smith"
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 2
+          - bot_uttered:
+              utter_name: utter_ask_age
+
+      - user: "I'm 28 years old"
+        assertions:
+          - slot_was_set:
+              - name: age
+                value: 28
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 3
+          - bot_uttered:
+              utter_name: utter_ask_gender
+
+      - user: "I'm male"
+        assertions:
+          - slot_was_set:
+              - name: gender
+                value: "male"
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 4
+          - bot_uttered:
+              utter_name: utter_ask_gender_preference
+
+      - user: "I'm interested in women"
+        assertions:
+          - slot_was_set:
+              - name: gender_preference
+                value: "women"
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 5
+          - bot_uttered:
+              utter_name: utter_ask_age_preference
+
+      - user: "25-35"
+        assertions:
+          - slot_was_set:
+              - name: age_preference
+                value: "25-35"
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 6
+          - bot_uttered:
+              utter_name: utter_ask_height
+
+      - user: "5'10\""
+        assertions:
+          - slot_was_set:
+              - name: height
+                value: 178.0
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 7
+          - slot_was_set:
+              - name: current_section
+                value: "userInfo"
+          - bot_uttered:
+              utter_name: utter_transition_to_userInfo
+          - bot_uttered:
+              utter_name: utter_transition_to_userInfo_about_skip
+          - slot_was_set:
+              - name: userInfo_stage_start
+                value: true
+
+  # TC-002: Minimal Valid Inputs
+  - test_case: minimal_valid_inputs
+    steps:
+      - user: "hi"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_ask_name
+
+      - user: "Sam"
+        assertions:
+          - slot_was_set:
+              - name: name
+                value: "Sam"
+          - bot_uttered:
+              utter_name: utter_ask_age
+
+      - user: "25"
+        assertions:
+          - slot_was_set:
+              - name: age
+                value: 25
+          - bot_uttered:
+              utter_name: utter_ask_gender
+
+      - user: "M"
+        assertions:
+          - slot_was_set:
+              - name: gender
+                value: "male"
+          - bot_uttered:
+              utter_name: utter_ask_gender_preference
+
+      - user: "F"
+        assertions:
+          - slot_was_set:
+              - name: gender_preference
+                value: "female"
+          - bot_uttered:
+              utter_name: utter_ask_age_preference
+
+      - user: "30s"
+        assertions:
+          - slot_was_set:
+              - name: age_preference
+                value: "30-39"
+          - bot_uttered:
+              utter_name: utter_ask_height
+
+      - user: "170"
+        assertions:
+          - slot_was_set:
+              - name: height
+                value: 170.0
+          - slot_was_set:
+              - name: current_section
+                value: "userInfo"
+
+  # TC-009: Single Field Error Recovery
+  - test_case: error_recovery_single_field
+    steps:
+      - user: "hello"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_ask_name
+
+      - user: "Jane"
+        assertions:
+          - slot_was_set:
+              - name: name
+                value: "Jane"
+          - bot_uttered:
+              utter_name: utter_ask_age
+
+      - user: "one thousand years"
+        # Invalid age, should not set the age slot
+        assertions:
+          - slot_not_set:
+              - name: age
+
+      - user: "30"
+        # Valid age, should now set the slot correctly
+        assertions:
+          - slot_was_set:
+              - name: age
+                value: 30
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 3
+          - bot_uttered:
+              utter_name: utter_ask_gender
+
+  # TC-012: Skip Individual Question
+  - test_case: skip_individual_question
+    steps:
+      - user: "hello"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_ask_name
+
+      - user: "Michael"
+        assertions:
+          - slot_was_set:
+              - name: name
+                value: "Michael"
+          - bot_uttered:
+              utter_name: utter_ask_age
+
+      - user: "I prefer not to say"
+        assertions:
+          # Age question should be skipped, moving to next stage
+          - slot_was_set:
+              - name: personal_data_stage
+                value: 3
+          - bot_uttered:
+              utter_name: utter_ask_gender
+
+      - user: "male"
+        assertions:
+          - slot_was_set:
+              - name: gender
+                value: "male"
+          - bot_uttered:
+              utter_name: utter_ask_gender_preference
+
+  # TC-013: Skip to User Info
+  - test_case: skip_to_user_info
+    steps:
+      - user: "hello"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_ask_name
+
+      - user: "Emma"
+        assertions:
+          - slot_was_set:
+              - name: name
+                value: "Emma"
+          - bot_uttered:
+              utter_name: utter_ask_age
+
+      - user: "27"
+        assertions:
+          - slot_was_set:
+              - name: age
+                value: 27
+          - bot_uttered:
+              utter_name: utter_ask_gender
+
+      - user: "female"
+        assertions:
+          - slot_was_set:
+              - name: gender
+                value: "female"
+          - bot_uttered:
+              utter_name: utter_ask_gender_preference
+
+      - user: "skip the rest"
+        assertions:
+          # Should transition to user info section
+          - slot_was_set:
+              - name: current_section
+                value: "userInfo"
+          - slot_was_set:
+              - name: userInfo_stage_start
+                value: true
+
+  # TC-017: Multi-Information Input
+  - test_case: multi_information_input
+    steps:
+      - user: "hello"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_ask_name
+
+      - user: "I'm David, 32 years old"
+        assertions:
+          # If the bot can extract multiple information points:
+          - slot_was_set:
+              - name: name
+                value: "David"
+          # If multi-extraction is supported, age might also be set
+          # If not, the next question should be about age
+
+      # Continue with the remaining flow depending on what was extracted
+
+  # TC-019: Information Change Requests
+  - test_case: information_change_request
+    steps:
+      - user: "hello"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_ask_name
+
+      - user: "Robert"
+        assertions:
+          - slot_was_set:
+              - name: name
+                value: "Robert"
+          - bot_uttered:
+              utter_name: utter_ask_age
+
+      - user: "34"
+        assertions:
+          - slot_was_set:
+              - name: age
+                value: 34
+          - bot_uttered:
+              utter_name: utter_ask_gender
+
+      - user: "I want to change my name to Bob"
+        assertions:
+          # If the bot supports change requests:
+          - slot_was_set:
+              - name: name
+                value: "Bob"
+          # The flow should continue appropriately
+
+  # TC-022: International Name Handling
+  - test_case: international_name_handling
+    steps:
+      - user: "hello"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_ask_name
+
+      - user: "José García"
+        assertions:
+          - slot_was_set:
+              - name: name
+                value: "José García"
+          - bot_uttered:
+              utter_name: utter_ask_age
+
+      # Continue with the rest of the flow
+
+  # TC-023: International Format Support
+  - test_case: international_format_support
+    steps:
+      - user: "hello"
+        assertions:
+          - bot_uttered:
+              utter_name: utter_ask_name
+
+      - user: "Sophia"
+        assertions:
+          - slot_was_set:
+              - name: name
+                value: "Sophia"
+          - bot_uttered:
+              utter_name: utter_ask_age
+
+      # Skip to height question through normal flow
+      - user: "29"
+        assertions:
+          - slot_was_set:
+              - name: age
+                value: 29
+
+      - user: "female"
+        assertions:
+          - slot_was_set:
+              - name: gender
+                value: "female"
+
+      - user: "men"
+        assertions:
+          - slot_was_set:
+              - name: gender_preference
+                value: "men"
+
+      - user: "30-40"
+        assertions:
+          - slot_was_set:
+              - name: age_preference
+                value: "30-40"
+          - bot_uttered:
+              utter_name: utter_ask_height
+
+      - user: "180cm"
+        assertions:
+          # Should handle metric format properly
+          - slot_was_set:
+              - name: height
+                value: 180.0
+          - slot_was_set:
+              - name: current_section
+                value: "userInfo" 

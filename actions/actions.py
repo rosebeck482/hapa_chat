@@ -1,4 +1,4 @@
-from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List, Optional
 import os
 import re
 import logging
@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 import time
 import httpx
 import copy
+from word2number import w2n
 
 # Load environment variables from .env file
 load_dotenv()
@@ -264,8 +265,6 @@ class ActionCollectName(Action):
         return [SlotSet("name", name), SlotSet("personal_data_stage", 2)]
     
 
-from datetime import datetime
-
 class ActionCollectAge(Action):
     def name(self) -> Text:
         return "action_collect_age"
@@ -307,12 +306,17 @@ class ActionCollectAge(Action):
                 slot_events.append(SlotSet("dob", dob))
             return slot_events
 
-        # Step 2: Try to extract age from entities
+        # Step 1: Try to extract age using entities
         entities = tracker.latest_message.get("entities", [])
         age_entity = next((e for e in entities if e["entity"] == "age"), None)
         age = age_entity["value"] if age_entity else None
-
-        # Step 3: Try to extract age using Ollama
+        
+        # Step 2: If no entity, try to extract using text processing
+        if not age:
+            age = self._extract_age_from_text(message)
+            logger.info(f"Extracted age from text: {age}")
+        
+        # Step 3: If still no age, try Ollama as fallback
         if not age:
             system_prompt = "You are a helpful assistant that extracts a user's age from their sentence."
             user_prompt = f"Extract only the user's age as a number from the following message. If age is provided in words, convert it to a number. If no valid age is found, return 'None'.\n\nMessage: \"{message}\""
@@ -320,14 +324,32 @@ class ActionCollectAge(Action):
 
             if age_response:
                 logger.info(f"Ollama raw response: {age_response}")
-                age = age_response.strip().strip('"').strip()
+                age_str = age_response.strip().strip('"').strip()
+                if age_str.lower() != "none" and age_str.isdigit():
+                    age = int(age_str)
 
-        # Step 4: Ask again if age is still not found
-        if not age:
-            dispatcher.utter_message(text=f"I didn't catch your age, {name}. Could you tell me how old you are?")
+        # Step 4: Validate the age
+        if age is not None:
+            # Convert to int if it's a string or float
+            if isinstance(age, str):
+                try:
+                    age = int(float(age))
+                except ValueError:
+                    age = None
+            elif isinstance(age, float):
+                age = int(age)
+                
+            # Validate age range
+            if age is not None and (age < 18 or age > 120):
+                dispatcher.utter_message(text=f"I'm sorry, {name}, but the age you provided seems invalid. Please provide a valid age between 18 and 120.")
+                age = None
+
+        # Step 5: Ask again if age is still not found or invalid
+        if age is None:
+            dispatcher.utter_message(text=f"I didn't catch your age, {name}. Could you tell me how old you are? (For example, '25' or 'twenty-five')")
             return []
 
-        # Step 5: Extract DOB using new age
+        # Step 6: Extract DOB using the age
         try:
             system_prompt = "You are a helpful assistant that calculates a date of birth."
             user_prompt = f"Today is {datetime.now().strftime('%B %d, %Y')}. If someone is {age} years old today, what is their date of birth? Format it as YYYY-MM-DD only."
@@ -341,7 +363,7 @@ class ActionCollectAge(Action):
         except Exception as e:
             logger.error(f"Failed to extract dob using Ollama: {str(e)}")
 
-        # Step 6: Set slots and ask gender
+        # Step 7: Set slots and proceed
         logger.info(f"Setting age slot to: {age}")
         dispatcher.utter_message(text=f"Thanks for providing you're {age}, {name}!")
         dispatcher.utter_message(response="utter_ask_gender")
@@ -350,6 +372,57 @@ class ActionCollectAge(Action):
         if dob:
             slot_events.append(SlotSet("dob", dob))
         return slot_events
+        
+    def _extract_age_from_text(self, text):
+        """Extract age from text using various methods"""
+        # Try to extract birth year (e.g., "born in 1990")
+        birth_year_match = re.search(r"born in (\d{4})", text, re.IGNORECASE)
+        if birth_year_match:
+            birth_year = int(birth_year_match.group(1))
+            current_year = datetime.now().year
+            age = current_year - birth_year
+            if 18 <= age <= 120:
+                return age
+        
+        # Try to extract age as a number
+        age_match = re.search(r"\b(\d{1,3})\s*(?:years?(?:\s*old)?)?", text, re.IGNORECASE)
+        if age_match:
+            try:
+                age = int(age_match.group(1))
+                if 18 <= age <= 120:
+                    return age
+            except ValueError:
+                pass
+        
+        # Try to extract text numbers like "twenty-five"
+        try:
+            # Clean text to help word2number processing
+            clean_text = text.lower().replace('-', ' ').replace('years old', '').replace('years', '')
+            
+            # Try different phrases that might contain the age
+            for phrase in clean_text.split(','):
+                try:
+                    for word in phrase.split():
+                        if word in ["a", "an", "the", "i", "am", "i'm", "im"]:
+                            continue
+                        try:
+                            age = w2n.word_to_num(word.strip())
+                            if 18 <= age <= 120:
+                                return age
+                        except ValueError:
+                            pass
+                            
+                    # Try the whole phrase
+                    age = w2n.word_to_num(phrase.strip())
+                    if 18 <= age <= 120:
+                        return age
+                except ValueError:
+                    continue
+        except Exception as e:
+            logger.error(f"Error extracting age from text: {str(e)}")
+            
+        # No valid age found
+        return None
 
 
 class ActionCollectGender(Action):
@@ -406,49 +479,191 @@ class ActionCollectGenderPreference(Action):
         return "action_collect_gender_preference"
 
     async def run(self, dispatcher: CollectingDispatcher,
-                  tracker: Tracker,
-                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
+                 tracker: Tracker,
+                 domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
         message = tracker.latest_message.get("text", "")
         intent = tracker.latest_message.get("intent", {}).get("name", "")
         name = tracker.get_slot("name") or "there"
-        current_gender_pref = tracker.get_slot("gender_preference")
-
+        
         logger.info(f"ActionCollectGenderPreference called with intent: {intent}, message: {message}")
-
-
-        if current_gender_pref and current_gender_pref.strip():
-            logger.info(f"Gender preference set to: {current_gender_pref}")
-            dispatcher.utter_message(text=f"Thanks for sharing that you're interested in {current_gender_pref}s, {name}!")
+        
+        # Step 1: Check if preference is already set
+        current_preference = tracker.get_slot("gender_preference")
+        if current_preference and current_preference.strip():
+            dispatcher.utter_message(text=f"You're interested in {current_preference}. Thanks for sharing, {name}!")
             dispatcher.utter_message(response="utter_ask_age_preference")
             return [SlotSet("personal_data_stage", 5)]
         
+        # Step 2: Try to extract gender preference from entities
+        preferences = []
         entities = tracker.latest_message.get("entities", [])
-        gender_pref_entity = next((e for e in entities if e["entity"] == "gender_preference"), None)
-        gender_pref = gender_pref_entity["value"] if gender_pref_entity else None
-
-        # Step 2: Try to extract with Ollama if needed
-        if not gender_pref:
-            system_prompt = "You are a helpful assistant that extracts a user's gender preference."
-            user_prompt = f"From the following message, extract the gender(s) the user is interested in dating as one of: 'male', 'female', 'non-binary', or 'any'. Respond with only one of those. If unclear or missing, respond with 'None'.\n\nMessage: \"{message}\""
-            gender_response = call_ollama_api(system_prompt, user_prompt, max_tokens=10)
-
-            if gender_response:
-                logger.info(f"Ollama raw response: {gender_response}")
-                cleaned = gender_response.strip().strip('"').strip().lower()
-                if cleaned in ["male", "female", "non-binary", "any"]:
-                    gender_pref = cleaned
-
-        # Step 3: Ask again if nothing extracted
-        if not gender_pref:
-            dispatcher.utter_message(text=f"I didn't catch your gender preference, {name}. Could you tell me if you're interested in males, females, non-binary individuals, or anyone?")
+        
+        # Check for direct gender_preference entities
+        preference_entities = [e for e in entities if e["entity"] == "gender_preference"]
+        for entity in preference_entities:
+            value = entity.get("value", "").lower()
+            if value and value not in preferences:
+                preferences.append(value)
+        
+        # Also look for gender entities as they might indicate preferences
+        gender_entities = [e for e in entities if e["entity"] == "gender"]
+        for entity in gender_entities:
+            value = entity.get("value", "").lower()
+            if value and value not in preferences:
+                preferences.append(value)
+        
+        # Step 3: If no entities found, try to extract using Ollama
+        if not preferences:
+            system_prompt = "You are a helpful assistant extracting gender preferences from text."
+            user_prompt = f"""
+            Extract the gender preference(s) from this message: "{message}"
+            Valid preferences are 'male', 'female', 'non-binary', 'everyone', or 'everyone'
+            If multiple preferences are mentioned (like "both men and women"), list all of them separated by commas.
+            If no preference is specified or unclear, return 'unclear'.
+            For 'both' or similar terms indicating multiple genders, return the specific genders if possible.
+            Format your response as a simple comma-separated list without explanation.
+            """
+            preference_response = call_ollama_api(system_prompt, user_prompt, max_tokens=20)
+            
+            if preference_response:
+                extracted_preferences = preference_response.strip().strip('"').strip().lower()
+                if extracted_preferences and extracted_preferences != "unclear":
+                    for pref in extracted_preferences.split(','):
+                        clean_pref = pref.strip()
+                        if clean_pref and clean_pref not in preferences:
+                            preferences.append(clean_pref)
+        
+        # Step 4: Process and normalize the preferences
+        normalized_preferences = self._normalize_preferences(preferences)
+        
+        # Step 5: Ask again if no preferences found
+        if not normalized_preferences:
+            dispatcher.utter_message(text=f"I didn't catch your preference, {name}. Are you interested in men, women, non-binary people, or everyone?")
             return []
-
-        # Step 4: Set slot and proceed
-        logger.info(f"Setting gender_preference slot to: {gender_pref}")
-        dispatcher.utter_message(text=f"Thanks for sharing that you're interested in {gender_pref}s, {name}!")
+        
+        # Step 6: Format preference string and proceed
+        if len(normalized_preferences) == 1:
+            preference_str = normalized_preferences[0]
+        elif len(normalized_preferences) == 2:
+            preference_str = f"{normalized_preferences[0]} and {normalized_preferences[1]}"
+        else:
+            preference_str = ", ".join(normalized_preferences[:-1]) + f", and {normalized_preferences[-1]}"
+        
+        dispatcher.utter_message(text=f"I see you're interested in {preference_str}. Thanks for sharing, {name}!")
         dispatcher.utter_message(response="utter_ask_age_preference")
-        return [SlotSet("gender_preference", gender_pref), SlotSet("personal_data_stage", 5)]
+        
+        # Combine multiple preferences with a comma if there are more than one
+        combined_preference = ", ".join(normalized_preferences) if len(normalized_preferences) > 1 else normalized_preferences[0]
+        
+        return [SlotSet("gender_preference", combined_preference), SlotSet("personal_data_stage", 5)]
+    
+    def _normalize_preferences(self, preferences):
+        """Normalize and standardize gender preferences"""
+        if not preferences:
+            return []
+            
+        normalized = []
+        
+        # Map various terms to standard values
+        preference_map = {
+            # Male terms
+            'man': 'men',
+            'male': 'men',
+            'males': 'men',
+            'guys': 'men',
+            'boys': 'men',
+            'm': 'men',
+            'masculine': 'men',
+            
+            # Female terms
+            'woman': 'women',
+            'female': 'women',
+            'females': 'women',
+            'gals': 'women',
+            'ladies': 'women',
+            'girls': 'women',
+            'f': 'women',
+            'feminine': 'women',
+            
+            # Non-binary terms
+            'non binary': 'non-binary',
+            'nonbinary': 'non-binary',
+            'enby': 'non-binary',
+            'nb': 'non-binary',
+            'genderqueer': 'non-binary',
+            'genderfluid': 'non-binary',
+            'agender': 'non-binary',
+            
+            # Everyone terms
+            'everyone': 'everyone',
+            'anybody': 'everyone',
+            'anyone': 'everyone',
+            'all': 'everyone',
+            'all genders': 'everyone',
+            'any': 'everyone',
+            'any gender': 'everyone',
+            'no preference': 'everyone',
+            'both': 'everyone',
+            'all of the above': 'everyone',
+            'pansexual': 'everyone',
+            'pan': 'everyone',
+            
+            # Both male and female (when specific)
+            'men and women': 'men, women',
+            'males and females': 'men, women',
+            'women and men': 'women, men',
+            'females and males': 'women, men'
+        }
+        
+        # Handle special cases first
+        combined_input = " ".join(preferences).lower()
+        
+        # "Both men and women" special case
+        if "both" in combined_input and ("men" in combined_input or "male" in combined_input) and ("women" in combined_input or "female" in combined_input):
+            return ['men', 'women']
+            
+        # Process each preference
+        for pref in preferences:
+            pref_lower = pref.lower().strip()
+            
+            # Check if it's a direct match in our map
+            if pref_lower in preference_map:
+                mapped_pref = preference_map[pref_lower]
+                
+                # Handle case where mapped_pref contains multiple values
+                if ',' in mapped_pref:
+                    for split_pref in mapped_pref.split(','):
+                        clean_split = split_pref.strip()
+                        if clean_split and clean_split not in normalized:
+                            normalized.append(clean_split)
+                elif mapped_pref not in normalized:
+                    normalized.append(mapped_pref)
+            
+            # Handle if it's already in standard form
+            elif pref_lower in ['men', 'women', 'non-binary', 'everyone'] and pref_lower not in normalized:
+                normalized.append(pref_lower)
+                
+            # If we can't map it, check for substrings
+            else:
+                if any(term in pref_lower for term in ['guy', 'male', 'man', 'men', 'm ', ' m']):
+                    if 'men' not in normalized:
+                        normalized.append('men')
+                if any(term in pref_lower for term in ['gal', 'female', 'woman', 'women', 'f ', ' f']):
+                    if 'women' not in normalized:
+                        normalized.append('women')
+                if any(term in pref_lower for term in ['non-binary', 'nonbinary', 'enby', 'nb']):
+                    if 'non-binary' not in normalized:
+                        normalized.append('non-binary')
+                if any(term in pref_lower for term in ['all', 'any', 'every', 'pan']):
+                    if 'everyone' not in normalized:
+                        normalized.append('everyone')
+        
+        # If 'everyone' is included, that's all we need
+        if 'everyone' in normalized:
+            return ['everyone']
+            
+        return normalized
 
 
 class ActionCollectAgePreference(Action):

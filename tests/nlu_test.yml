@@ -1,0 +1,157 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hello
+      - hi
+      - hey there
+      - good morning
+      - howdy
+      - greetings
+      - nice to meet you
+      - what's up
+  
+  - intent: provide_name
+    examples: |
+      - My name is [John](name)
+      - I'm [Sarah](name)
+      - people call me [Mike](name)
+      - [Jessica Smith](name)
+      - [David Johnson](name) is my name
+      - you can call me [Alex](name)
+      - name's [Robert](name)
+      - the name is [James Bond](name)
+      - I go by [Elizabeth](name)
+      - [José García](name)
+      - [François Dupont](name)
+      - I'm [María Rodríguez](name)
+      - They call me [Dr. Smith](name)
+      - [O'Malley](name)
+      - [Smith-Johnson](name)
+  
+  - intent: provide_age
+    examples: |
+      - I'm [28](age) years old
+      - [32](age)
+      - my age is [45](age)
+      - I am [24](age)
+      - [30](age) years
+      - [twenty-five](age)
+      - [forty two](age)
+      - [thirty-seven](age)
+      - born in [1990](age)
+      - [nineteen](age) years old
+      - I'll be [31](age) next month
+      - about [27](age)
+      - exactly [50](age)
+      - almost [29](age)
+  
+  - intent: provide_gender
+    examples: |
+      - I'm a [male](gender)
+      - [female](gender)
+      - I identify as [non-binary](gender)
+      - [man](gender)
+      - [woman](gender)
+      - [male](gender)
+      - I'm [female](gender)
+      - [non-binary](gender)
+      - I'm a [woman](gender)
+      - [guy](gender)
+      - [genderqueer](gender)
+      - [masculine](gender)
+      - [feminine](gender)
+      - [enby](gender)
+      - [trans man](gender)
+      - [trans woman](gender)
+  
+  - intent: provide_gender_preference
+    examples: |
+      - I like [men](gender_preference)
+      - I prefer [women](gender_preference)
+      - I'm attracted to [non-binary](gender_preference) people
+      - [men](gender_preference)
+      - [women](gender_preference)
+      - into [guys](gender_preference)
+      - into [girls](gender_preference)
+      - I date [men and women](gender_preference)
+      - I'm interested in [masculine](gender_preference) people
+      - [feminine](gender_preference) people
+      - [all genders](gender_preference)
+      - [everyone](gender_preference)
+      - [both](gender_preference)
+      - I like [men](gender_preference) and [women](gender_preference)
+      - interested in [non-binary people](gender_preference)
+  
+  - intent: provide_age_preference
+    examples: |
+      - I like people between [25 and 35](age_preference)
+      - [20-30](age_preference)
+      - [30-40](age_preference)
+      - [25 to 35](age_preference)
+      - [twenties](age_preference)
+      - [thirties](age_preference)
+      - [40s](age_preference)
+      - people in their [30s](age_preference)
+      - around [my age](age_preference)
+      - [older](age_preference) than me
+      - [younger](age_preference) than me
+      - [mature](age_preference)
+      - [mid-twenties](age_preference)
+      - [18-25](age_preference)
+      - [over 30](age_preference)
+  
+  - intent: provide_height
+    examples: |
+      - I'm [5'10"](height)
+      - [5 feet 8 inches](height)
+      - [175cm](height)
+      - [1.78m](height)
+      - [170](height) centimeters
+      - [6'2"](height)
+      - [5 foot 6](height)
+      - [five foot eleven](height)
+      - I stand [6 feet](height) tall
+      - about [182cm](height)
+      - [5 feet 7 inches](height) tall
+      - my height is [5'9"](height)
+      - [1,75m](height)
+      - [1.65 meters](height)
+      - [180](height)
+  
+  - intent: request_skip
+    examples: |
+      - skip
+      - skip this question
+      - next question
+      - I'd rather not say
+      - prefer not to answer
+      - let's move on
+      - skip this part
+      - I don't want to share that
+      - go to the next section
+      - can we skip this
+      - pass
+      - next
+      - let's skip this
+      - continue without this
+      - I don't want to answer that
+  
+  - intent: out_of_scope
+    examples: |
+      - what's the weather like?
+      - tell me a joke
+      - who created you?
+      - what time is it?
+      - can you recommend a restaurant?
+      - what's 2+2?
+      - do you have siblings?
+      - how does this app work?
+      - when will you get smarter?
+      - are you real?
+      - sing me a song
+      - what's your favorite color?
+      - what is the meaning of life?
+      - where do you live?
+      - how many users do you have? 
