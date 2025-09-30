@@ -1,9 +1,5 @@
 # Rasa Dating Profile Assistant
 
-Create rich, privacy-aware dating profiles through a conversational experience powered by Rasa 3.6, custom Python actions, and optional Supabase-backed frontends. The assistant walks users through collecting personal details, personality traits, and partner preferences while persisting structured conversation logs for later review.
-
----
-
 ## Highlights
 
 - **Guided profile flow** – intents, stories, and custom actions collaborate to gather name, age, gender, interests, and deal breakers with graceful fallbacks.
