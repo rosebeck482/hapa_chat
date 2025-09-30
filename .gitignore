@@ -1,9 +1,36 @@
-# Virtual Environment
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
 venv/
-memory-bank/
-.cursor/
+.venv/
+env/
+.env
+.env.*
 
+# Rasa build artifacts
+.rasa/cache/
+models/
+conversation_logs/
 
-# Old Rasa models - keep only the latest
-models/20250420-*.tar.gz
-models/20250421-*.tar.gz
+# Testing and coverage output
+.pytest_cache/
+.coverage
+coverage.xml
+
+# Editors & OS metadata
+.DS_Store
+.idea/
+.vscode/
+
+# Node / frontend build artifacts
+node_modules/
+dist/
+build/
+
+# Miscellaneous
+*.log
+*.bak
+*.backup
